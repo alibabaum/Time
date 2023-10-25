@@ -2,7 +2,7 @@ public class Time {
     //instance variables
     private int hour;
     private int minute;
-    private double second;
+    private int second;
 
     //constructors are special methods that are invoked when an object is created.
     //has to be the same name as the class
@@ -10,17 +10,17 @@ public class Time {
         //"this" is saying to use the variables that are IN this class, not the ones from above.
         this.hour = 0;
         this.minute = 0;
-        this.second = 0.0;
+        this.second = 0;
     }
 
-    public Time(int hour, int minute, double second) {
+    public Time(int hour, int minute, int second) {
         this.hour = hour;
         this.minute = minute;
         this.second = second;
     }
 
-    public void increment(double second) {
-        int newSecond = (int) second / 60;
+    public void increment(int second) {
+        int newSecond = second / 60;
         second = second % 60;
         minute = newSecond + minute;
         while (minute >= 60) {
