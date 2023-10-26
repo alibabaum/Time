@@ -21,8 +21,8 @@ public class Time {
 
     public void increment(int second) {
         this.second = second + this.second;
-        this.minute = this.minute + (this.second/60);
-        this.hour = this.hour + (this.minute/60);
+        this.minute = this.minute + (this.second / 60);
+        this.hour = this.hour + (this.minute / 60);
         this.second = this.second % 60;
         this.minute = this.minute % 60;
         this.hour = this.hour % 24;
@@ -30,13 +30,13 @@ public class Time {
     }
 
     public void print(boolean military) {
-        if (military){
+        if (military) {
             System.out.println(String.format("%02d:%02d:%02d", hour, minute, second));
         } else {
-            if (this.hour == 0){
+            if (this.hour == 0) {
                 int newHour = 12;
                 System.out.println(String.format("%02d:%02d:%02d AM", newHour, minute, second));
-            } else if (this.hour > 12){
+            } else if (this.hour > 12) {
                 int newHour = this.hour - 12;
                 System.out.println(String.format("%02d:%02d:%02d PM", newHour, minute, second));
             } else {
