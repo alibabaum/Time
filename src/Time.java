@@ -20,32 +20,38 @@ public class Time {
     }
 
     public void increment(int second) {
-        int newSecond = second / 60;
-        second = second % 60;
-        minute = newSecond + minute;
-        while (minute >= 60) {
-            minute = minute - 60;
-            int addHour = minute/60;
-            hour = hour + addHour;
-        }
+        this.second = second + this.second;
+        this.minute = this.minute + (this.second/60);
+        this.hour = this.hour + (this.minute/60);
+        this.second = this.second % 60;
+        this.minute = this.minute % 60;
+        this.hour = this.hour % 24;
         new Time(hour, minute, second);
     }
 
     public void print(boolean military) {
-        if (true) {
-            System.out.println(hour + ":" + minute + ":" + second);
+        if (military){
+            System.out.println(String.format("%02d:%02d:%02d", hour, minute, second));
         } else {
-            int newHour = 24 - hour;
-            System.out.println(newHour + ":" + minute + ":" + second);
+            if (this.hour == 0){
+                int newHour = 12;
+                System.out.println(String.format("%02d:%02d:%02d AM", newHour, minute, second));
+            } else if (this.hour > 12){
+                int newHour = this.hour - 12;
+                System.out.println(String.format("%02d:%02d:%02d PM", newHour, minute, second));
+            } else {
+                System.out.println(String.format("%02d:%02d:%02d AM", hour, minute, second));
+            }
         }
+
     }
 
-    public static void fromString() {
-        String[] convert = String.split(":", 3);
+    public static Time fromString(String str) {
+        String[] convert = str.split(":", 3);
         int hour = Integer.parseInt(convert[0]);
         int minute = Integer.parseInt(convert[1]);
         int second = Integer.parseInt(convert[2]);
-        new Time(hour, minute, second);
+        return new Time(hour, minute, second);
     }
 }
-}
+
